@@ -1,36 +1,9 @@
 import React, {Component} from 'react'
 // import {connect} from 'react-redux'
 // import todosFactory from './redux/todosFactory'
-import { useDrag,DropTarget } from 'react-dnd'
+import { DropTarget } from 'react-dnd'
+import Name from './Name'
 
-
-
-
-const style = {
-  cursor: 'move',
-  
-}
-const Name = ({ name }) => {
-  const [{ isDragging }, drag] = useDrag({
-    item: { name, type: 'NAME' },
-    end: (item, monitor) => {
-      const dropResult = monitor.getDropResult()
-      if (item && dropResult) {
-        alert(`You dropped ${item.name} into ${dropResult.slotid}!`)
-      }
-    },
-    collect: monitor => ({
-      isDragging: monitor.isDragging(),
-    }),
-  })
-  const opacity = isDragging ? 0.4 : 1
-  const border = isDragging ? 'none' : 'none'
-  return (
-    <span ref={drag} style={{ ...style, opacity, border }}>
-      {name}
-    </span>
-  )
-}
 
 
 const slotStyle = {
@@ -38,31 +11,13 @@ const slotStyle = {
 }
 
 
-
-
 class Slot extends Component{
 	constructor(props){
 		super(props)
 
-    var names = [
-        {
-          id:1,
-          name:'Peter',
-          location:'holder1'
-        },
-        {
-          id:2,
-          name:'Paul',
-          location:'duckie2'
-        } 
-      ] 
+    var names = props.list
 
-    var found = names.find(name => name.location == props.slotid);
-
-    console.log(props.slotid)
-    this.state = {
-      name: found ? found : null
-    }
+  
 
 
 	}
@@ -71,20 +26,22 @@ class Slot extends Component{
 
 	render(){
 
-    var {name} = this.state
+    // var {name} = this.state
     var { canDrop, isOver, connectDropTarget } = this.props
 
-    const isActive = canDrop && isOver && (name==null)
+    var found = this.props.list.find(name => name.location == this.props.slotid);
 
-    let border = 'thin purple solid'
+    const isActive = canDrop && isOver && (found==false)
+
+    let border = ''
 
 
     if (isActive) {
-      border = 'thin green solid'
+      border = 'thin rgba(255, 85, 152,1) solid'
     } 
 		return (
-			<div class="name" ref={connectDropTarget} style={{ ...style, border }}>
-        {name ? (<Name name={name.name}/>) : null}
+			<div class="name" ref={!found ? connectDropTarget : null } style={{ ...slotStyle, border }}>
+        {found ? (<Name {...found} />) : null}
       </div>
 		)
 	}

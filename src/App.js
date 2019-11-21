@@ -5,7 +5,7 @@ import React, {Component} from 'react'
 
 import { DndProvider } from 'react-dnd'
 import HTML5Backend from 'react-dnd-html5-backend'
-
+import Name from './Name'
 import Slot from './Slot';
 import './App.css'
 
@@ -27,9 +27,65 @@ class  App extends Component {
         },
         {
           id:4,
+        },
+        {
+          id:5,
+        },
+        {
+          id:6,
+        },
+        {
+          id:7,
+        },
+        {
+          id:8,
         }
+      ],
+      names:[
+        {
+          id:1,
+          name:'Peter',
+          location:''
+        },
+        {
+          id:2,
+          name:'Paul',
+          location:''
+        } 
+        ,
+        {
+          id:3,
+          name:'Mary',
+          location:''
+        } ,
+
+        {
+          id:4,
+          name:'Joseph',
+          location:''
+        } 
       ]
     }
+
+  }
+
+  updateName = ({id,location}) => {
+
+    var names = [...this.state.names]
+
+    for(var i=0;i<names.length;i++){
+      var name = names[i]
+
+      console.log(name.name)
+      console.log(name.location=='')
+      if((name.id == id) && (name.location=='')){ 
+        name.location = location
+      }
+
+    }
+
+  
+    this.setState({names})
 
   }
 
@@ -51,12 +107,12 @@ class  App extends Component {
             <div class="names">
 
               {
+                this.state.names.map(name=>{
 
-                Array.from({ length: 13 }, (v, i) => i+1).map(n=>(
-
-                  <Slot key={n} slotid={'holder'+n}/>
-                ))
+                  return (name.location == '')? <Name updateName={this.updateName} {...name} /> : null
+                })
               }
+            
               
             </div>
             <div class="duckies">
@@ -68,7 +124,7 @@ class  App extends Component {
                       <div class="front"></div>
                       <div class="back"></div>
                     </div>
-                    <Slot slotid={'duckie'+duckie.id}/>
+                    <Slot list={this.state.names} slotid={'duckie'+duckie.id}/>
                   </div>
 
                 ))
