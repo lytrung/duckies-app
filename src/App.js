@@ -116,9 +116,7 @@ class  App extends Component {
         <div className="wrap">
 
 
-          <div class="container">
-            <h1>Pick your duckies</h1>
-          </div>
+
           <div class="container main">
             <i class={ this.state.isOpen ? 'fas fa-times': 'fas fa-bars'} onClick={this.handleBarsClick}></i>
             <div class={ this.state.isOpen ? 'names show': 'names'}>
@@ -150,9 +148,7 @@ class  App extends Component {
             </div>
 
           </div>
-          <div class="container">
-            <h1>Thank you</h1>
-          </div>
+
 
         </div>
       </DndProvider>
