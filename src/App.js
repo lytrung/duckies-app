@@ -39,6 +39,18 @@ class  App extends Component {
         },
         {
           id:8,
+        },
+        {
+          id:9,
+        },
+        {
+          id:10,
+        },
+        {
+          id:11,
+        },
+        {
+          id:12,
         }
       ],
       names:[
@@ -64,7 +76,8 @@ class  App extends Component {
           name:'Joseph',
           location:''
         } 
-      ]
+      ],
+      isOpen: false,
     }
 
   }
@@ -88,6 +101,10 @@ class  App extends Component {
     this.setState({names})
 
   }
+  handleBarsClick = () => {
+    this.setState({isOpen: !this.state.isOpen})
+  }
+
 
   render(){
     return (
@@ -103,8 +120,8 @@ class  App extends Component {
             <h1>Pick your duckies</h1>
           </div>
           <div class="container main">
-            
-            <div class="names">
+            <i class={ this.state.isOpen ? 'fas fa-times': 'fas fa-bars'} onClick={this.handleBarsClick}></i>
+            <div class={ this.state.isOpen ? 'names show': 'names'}>
 
               {
                 this.state.names.map(name=>{
@@ -121,8 +138,8 @@ class  App extends Component {
                 this.state.duckies.map(duckie=>(
                   <div key={duckie.id} class="duckie">
                     <div class="card">
-                      <div class="front"></div>
-                      <div class="back"></div>
+                      <div class="front" style={{backgroundImage:'url(/duckies/duckie'+(duckie.id < 10 ? '0' : '') + duckie.id+'a.jpg)'}}></div>
+                      <div class="back" style={{backgroundImage:'url(/duckies/duckie'+(duckie.id < 10 ? '0' : '') + duckie.id+'b.jpg)'}}></div>
                     </div>
                     <Slot list={this.state.names} slotid={'duckie'+duckie.id}/>
                   </div>

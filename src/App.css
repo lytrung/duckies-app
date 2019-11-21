@@ -1,5 +1,6 @@
 @import 'http://yui.yahooapis.com/pure/0.6.0/pure-min.css';
 @import 'https://fonts.googleapis.com/css?family=Montserrat:400,700&display=swap" rel="stylesheet';
+@import 'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.css';
 body{
     font-family: 'Montserrat', sans-serif;
 }
@@ -28,19 +29,46 @@ body{
 }
 
 .main{
-    display: flex;
-    padding:2em;
-    box-sizing: border-box;
+  position: relative;
+  box-sizing: border-box;
 
 }
 
-.names{
-    flex:0 0 7em;
+.fas{
+    position: absolute;
+    font-size: 2em;
+    top:0;
+    left:0;
+    z-index: 2000;
+    margin:0.5em;
+}
 
+.names{
+      
+    position: absolute;
+    width: 8em;
+    top:0;
+    left:-8em;
+    height: 100%;
     display: flex;
-    justify-content: flex-start;
+    justify-content: center;
     flex-wrap: wrap;
-    align-content: center;
+    align-content: flex-start;
+    /*border: thin rgba(255, 85, 152,0.5) solid;*/
+    z-index: 100;
+    transition:all ease 1s;
+    box-sizing: border-box;
+    padding-top: 4em;
+}
+
+.names.show{
+    left:0;
+}
+
+
+
+.names>div{
+    border:1px red solid;
 }
 
 
@@ -70,13 +98,12 @@ span{
 .duckies{
     display: flex;
     flex-wrap:wrap;
-    flex: 1 0 auto;
     align-content:flex-start;
-    margin-left:1em;
+
 }
 
 .duckie{
-    flex: 0 0 20em;
+    flex: 1 0 15em;
     position: relative;
 }
 
