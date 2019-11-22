@@ -79,9 +79,18 @@ span{
 }
 
 .duckie{
-    flex: 1 0 15em;
+    flex: 1 0 22%;
     position: relative;
 }
+
+@media only screen and (min-width: 60em) {
+    .duckie{
+        flex: 1 0 14%;
+      
+    }
+}
+
+
 
 .duckie .card{
     padding-top: 100%;
