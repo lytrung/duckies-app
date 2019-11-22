@@ -7,6 +7,7 @@ import { DndProvider } from 'react-dnd'
 import HTML5Backend from 'react-dnd-html5-backend'
 import Name from './Name'
 import Slot from './Slot';
+import Api from './API';
 import './App.css'
 
 class  App extends Component {
@@ -102,51 +103,66 @@ class  App extends Component {
         }
       ],
       names:[
-        {
-          id:1,
-          name:'Peter',
-          location:''
-        },
-        {
-          id:2,
-          name:'Paul',
-          location:''
-        } 
-        ,
-        {
-          id:3,
-          name:'Mary',
-          location:''
-        } ,
+        // {
+        //   id:1,
+        //   name:'Peter',
+        //   location:''
+        // },
+        // {
+        //   id:2,
+        //   name:'Paul',
+        //   location:''
+        // } 
+        // ,
+        // {
+        //   id:3,
+        //   name:'Mary',
+        //   location:''
+        // } ,
 
-        {
-          id:4,
-          name:'Joseph',
-          location:''
-        } 
+        // {
+        //   id:4,
+        //   name:'Joseph',
+        //   location:''
+        // } 
       ],
       isOpen: false,
     }
 
   }
 
+  componentDidMount(){
+    Api.getNames().then(res=>{
+
+      this.setState({names:res.data})
+    })
+  }
+
   updateName = ({id,location}) => {
 
-    var names = [...this.state.names]
+    // var names = [...this.state.names]
 
-    for(var i=0;i<names.length;i++){
-      var name = names[i]
+    // for(var i=0;i<names.length;i++){
+    //   var name = names[i]
 
-      console.log(name.name)
-      console.log(name.location=='')
-      if((name.id == id) && (name.location=='')){ 
-        name.location = location
-      }
+    //   if((name.id == id) && (name.location=='')){ 
+    //     name.location = location
+    //   }
 
-    }
+    // }
 
-  
-    this.setState({names})
+    // this.setState({names})
+
+    console.log(id,location)
+    Api.updateNames(id,{location})
+    .then(res=>{
+      console.log(res)
+      return Api.getNames()
+    })
+    .then(res=>{
+      console.log(res)
+      this.setState({names:res.data})
+    })
 
   }
   handleBarsClick = () => {
