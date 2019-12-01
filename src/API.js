@@ -1,8 +1,7 @@
 import axios from 'axios';
 
-var urlPrefix = 'http://10.2.24.42:3001/api'
-var serverUrl = 'http://10.2.24.42:3001/'
-
+var urlPrefix = 'https://duckies-api-260321.appspot.com/api'
+var serverUrl = 'https://duckies-api-260321.appspot.com/'
 
 var Api = {
 
